@@ -1,0 +1,43 @@
+import React, {Component} from 'react';
+import { View, Text, ScrollView, Image } from 'react-native';
+
+export default class Dokter extends Component{
+    constructor(){
+        super()
+        this.state = {
+            dokterHeader: "Ini adalah Halaman Dokter",
+            dataDokter: ""
+        }
+    }
+
+    componentDidMount(){
+        fetch("https://apirumahsakitbatch124.herokuapp.com/api/dokter", {
+            method: "GET"
+        })
+        //promise
+        .then((data) => {
+            debugger;
+            console.log(data);
+            this.setState({
+                dataDokter:data
+            })
+        })
+        .catch((error) => {
+            //debugger;
+            console.log(error);
+        });
+    }
+
+    static navigationOptions = {
+        title: 'Dokter',
+      };
+
+    render(){
+        return(
+            <View>
+                <Text>{this.state.dokterHeader}</Text>
+                <Text>{this.state.dataDokter._bodyText[KdDokter]}</Text>
+            </View>
+        );
+    }
+}
